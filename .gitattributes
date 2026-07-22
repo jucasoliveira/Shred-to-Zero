@@ -1,0 +1,35 @@
+# Normalize line endings for text
+* text=auto
+
+# Unity text-serialized assets — treat as text, force LF
+*.cs      text diff=csharp
+*.shader  text
+*.cginc   text
+*.hlsl    text
+*.uss     text
+*.uxml    text
+*.json    text
+*.md      text
+*.meta    text eol=lf
+*.unity   text eol=lf
+*.asset   text eol=lf
+*.prefab  text eol=lf
+*.mat     text eol=lf
+*.controller text eol=lf
+*.anim    text eol=lf
+
+# Treat large binary asset types as binary (add Git LFS later if these grow)
+*.png     binary
+*.jpg     binary
+*.jpeg    binary
+*.gif     binary
+*.psd     binary
+*.wav     binary
+*.mp3     binary
+*.ogg     binary
+*.aif     binary
+*.aiff    binary
+*.fbx     binary
+*.blend   binary
+*.ttf     binary
+*.otf     binary
