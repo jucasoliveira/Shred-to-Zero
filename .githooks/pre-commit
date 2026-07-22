@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+#
+# pre-commit: strip macOS AppleDouble (._*) files before every commit.
+#
+# This project has lived on an exFAT drive, where macOS writes a "._name"
+# sidecar next to every file. They are noise and must never enter history.
+# This hook deletes them from the working tree and drops any that slipped
+# into the index, then lets the commit proceed.
+#
+set -euo pipefail
+
+repo_root="$(git rev-parse --show-toplevel)"
+cd "$repo_root"
+
+removed=0
+
+# 1) Delete AppleDouble files/dirs from the committable working tree.
+#    Prune .git and the rebuildable/gitignored caches — their ._* files can
+#    never reach history, and Library/ alone holds tens of thousands of them.
+while IFS= read -r -d '' path; do
+    rm -rf "$path"
+    removed=$((removed + 1))
+done < <(find . \
+    \( -path ./.git -o -path ./Library -o -path ./Temp -o -path ./Logs \
+       -o -path ./obj -o -path ./Build -o -path ./Builds \
+       -o -path ./UserSettings -o -path ./MemoryCaptures \) -prune \
+    -o -name '._*' -print0)
+
+# 2) Un-stage any AppleDouble entries that were force-added to the index.
+staged="$(git ls-files -z -- ':(glob)**/._*' ':(glob)._*' || true)"
+if [ -n "$staged" ]; then
+    printf '%s' "$staged" | xargs -0 git rm -r --cached --quiet --ignore-unmatch
+fi
+
+if [ "$removed" -gt 0 ] || [ -n "$staged" ]; then
+    echo "pre-commit: removed ${removed} AppleDouble ._* entr$([ "$removed" -eq 1 ] && echo y || echo ies)"
+fi
+
+exit 0
