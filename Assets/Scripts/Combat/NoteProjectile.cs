@@ -59,7 +59,11 @@ namespace ShredToZero.Combat
         private void OnTriggerEnter2D(Collider2D other)
         {
             var enemy = other.GetComponentInParent<Enemy>();
-            if (enemy == null) return; // flew into a wall or non-enemy; let lifetime clean it up
+            if (enemy == null)
+            {
+                Debug.Log($"[Note] {Type} note overlapped '{other.name}' (not an Enemy) — ignoring.", this);
+                return; // flew into a wall or non-enemy; let lifetime clean it up
+            }
 
             enemy.TakeDamage(Type, Damage);
             Destroy(gameObject);

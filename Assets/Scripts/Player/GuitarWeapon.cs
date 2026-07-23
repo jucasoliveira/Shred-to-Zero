@@ -38,6 +38,10 @@ namespace ShredToZero.Player
         [Tooltip("Minimum seconds between shots, so a held/mashed key can't spray infinitely.")]
         public float fireCooldown = 0.12f;
 
+        [Header("Debug")]
+        [Tooltip("Print firing diagnostics to the Console. Turn off once it feels right.")]
+        public bool verboseLogs = true;
+
         [Header("Bindings (key → note type)")]
         public FireBinding[] bindings =
         {
@@ -67,6 +71,7 @@ namespace ShredToZero.Player
             {
                 if (k[binding.key].wasPressedThisFrame)
                 {
+                    if (verboseLogs) Debug.Log($"[Guitar] Key '{binding.key}' detected → firing {binding.type}", this);
                     Fire(binding.type);
                     break; // one note per frame
                 }
@@ -75,7 +80,16 @@ namespace ShredToZero.Player
 
         private void Fire(NoteType type)
         {
-            if (notePrefab == null || _player.muzzle == null) return;
+            if (notePrefab == null)
+            {
+                Debug.LogWarning("[GuitarWeapon] No Note Prefab assigned — drag the NoteProjectile prefab into the 'Note Prefab' field.", this);
+                return;
+            }
+            if (_player.muzzle == null)
+            {
+                Debug.LogWarning("[GuitarWeapon] PlayerController has no Muzzle assigned — drag the child 'Muzzle' object into PlayerController's 'Muzzle' field.", this);
+                return;
+            }
 
             _lastFireTime = Time.time;
 
@@ -84,6 +98,12 @@ namespace ShredToZero.Player
 
             NoteProjectile note = Instantiate(notePrefab, _player.muzzle.position, Quaternion.identity);
             note.Fire(type, _player.AimDirection, damage, onBeat);
+
+            if (verboseLogs)
+            {
+                string target = _player.CurrentTarget != null ? _player.CurrentTarget.name : "(cursor, no target)";
+                Debug.Log($"[Guitar] Fired {type} | onBeat={onBeat} | dmg={damage:0.#} → {target}", this);
+            }
 
             OnFired?.Invoke(type, onBeat);
         }

@@ -33,6 +33,8 @@ namespace ShredToZero.Combat
         [Header("Feedback")]
         [Tooltip("Tinted to show its weakness colour so players can read it at a glance.")]
         public bool tintToWeakness = true;
+        [Tooltip("Print damage diagnostics to the Console. Turn off once combat feels right.")]
+        public bool verboseLogs = true;
 
         /// <summary>Fired when this enemy dies. RunManager/riff-drop logic hooks here on Day 3.</summary>
         public event Action<Enemy> OnDied;
@@ -80,6 +82,14 @@ namespace ShredToZero.Combat
             float dealt = rawDamage * multiplier;
             Health -= dealt;
 
+            if (verboseLogs)
+            {
+                string effectiveness = multiplier > 1f ? "WEAK ×" + weakMultiplier
+                                     : multiplier < 1f ? "RESIST ×" + resistMultiplier
+                                     : "normal";
+                Debug.Log($"[Enemy {name}] hit by {type} ({effectiveness}) → {dealt:0.#} dmg | HP {Mathf.Max(0f, Health):0.#}/{maxHealth:0.#}", this);
+            }
+
             FlashHit(multiplier);
 
             if (Health <= 0f) Die();
@@ -106,6 +116,7 @@ namespace ShredToZero.Combat
 
         private void Die()
         {
+            if (verboseLogs) Debug.Log($"[Enemy {name}] defeated!", this);
             OnDied?.Invoke(this);
             // Day 3 hook: roll a riff drop here before destroying.
             Destroy(gameObject);
