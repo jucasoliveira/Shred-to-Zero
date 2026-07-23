@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using ShredToZero.Combat;
+using ShredToZero.Player;
 
 namespace ShredToZero.Game
 {
@@ -25,6 +26,9 @@ namespace ShredToZero.Game
         public BombTimer bomb;
 
         public RunState State { get; private set; } = RunState.Playing;
+
+        /// <summary>How the run ended, for the result screen ("bomb" or "killed").</summary>
+        public string LossReason { get; private set; } = "bomb";
 
         /// <summary>True once every enemy present at run start has been defeated.</summary>
         public bool AllEnemiesDefeated => _aliveEnemies <= 0;
@@ -52,9 +56,13 @@ namespace ShredToZero.Game
             if (bomb == null) bomb = FindFirstObjectByType<BombTimer>();
             if (bomb != null)
             {
-                bomb.OnDetonated += Lose;
+                bomb.OnDetonated += LoseToBomb;
                 bomb.OnDisarmed += Win;
             }
+
+            // Getting shot down ends the run too.
+            var health = FindFirstObjectByType<PlayerHealth>();
+            if (health != null) health.OnDied += LoseToGoons;
 
             Debug.Log($"[Run] Started — {_aliveEnemies} goons in the building.");
         }
@@ -81,9 +89,18 @@ namespace ShredToZero.Game
             EndRun();
         }
 
-        private void Lose()
+        private void LoseToBomb()
         {
             if (State != RunState.Playing) return;
+            LossReason = "bomb";
+            State = RunState.Lost;
+            EndRun();
+        }
+
+        private void LoseToGoons()
+        {
+            if (State != RunState.Playing) return;
+            LossReason = "killed";
             State = RunState.Lost;
             EndRun();
         }
@@ -131,10 +148,14 @@ namespace ShredToZero.Game
             }
             else
             {
+                bool killed = LossReason == "killed";
                 title.normal.textColor = new Color(1f, 0.4f, 0.3f);
-                GUI.Label(new Rect(0, Screen.height / 2f - 70, Screen.width, 80), "K A B O O M", title);
+                GUI.Label(new Rect(0, Screen.height / 2f - 70, Screen.width, 80),
+                          killed ? "YOU GOT SHREDDED" : "K A B O O M", title);
                 sub.normal.textColor = Color.white;
-                GUI.Label(new Rect(0, Screen.height / 2f + 10, Screen.width, 40), "The bomb won. Press R to try again.", sub);
+                GUI.Label(new Rect(0, Screen.height / 2f + 10, Screen.width, 40),
+                          killed ? "The goons took you down. Press R to try again."
+                                 : "The bomb won. Press R to try again.", sub);
             }
         }
     }

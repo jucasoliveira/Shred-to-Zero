@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 1669740}
   - component: {fileID: 1669739}
   - component: {fileID: 1669738}
+  - component: {fileID: 1669742}
   m_Layer: 0
   m_Name: Enemy - Power
   m_TagString: Enemy
@@ -307,6 +308,27 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &1669742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1669736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fea19d37353fe46309614ccfa1bac4e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShredToZero.Combat.EnemyAttack
+  projectilePrefab: {fileID: 5885613017319890068, guid: 2b740c7853f3d483d9d4a0f1bd36e36f, type: 3}
+  muzzle: {fileID: 0}
+  damage: 10
+  projectileSpeed: 5
+  range: 9
+  fireOnBeat: 1
+  beatsBetweenShots: 2
+  fireInterval: 2
+  verboseLogs: 0
 --- !u!1 &83207905
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,6 +343,7 @@ GameObject:
   - component: {fileID: 83207909}
   - component: {fileID: 83207908}
   - component: {fileID: 83207907}
+  - component: {fileID: 83207912}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -517,6 +540,22 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &83207912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83207905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81e278d37e32240f9829306c136ae13c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShredToZero.Player.PlayerHealth
+  maxHealth: 100
+  invulnSeconds: 0.5
+  hitFlashColor: {r: 1, g: 0.3, b: 0.3, a: 1}
+  verboseLogs: 1
 --- !u!1 &244559854
 GameObject:
   m_ObjectHideFlags: 0
@@ -1239,7 +1278,7 @@ MonoBehaviour:
   playOnStart: 1
   scheduleAheadSeconds: 0.2
   inputLatencySeconds: 0
-  metronome: 0
+  metronome: 1
   metronomeClick: {fileID: 0}
   metronomeVolume: 0.5
 --- !u!82 &1444011563

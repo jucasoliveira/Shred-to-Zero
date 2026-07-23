@@ -10,6 +10,10 @@ namespace ShredToZero.Combat
     [RequireComponent(typeof(Collider2D))]
     public class NoteProjectile : MonoBehaviour
     {
+        [Header("Debug")]
+        [Tooltip("Log when the note overlaps something that isn't an enemy. Noisy — off by default.")]
+        public bool verboseLogs = false;
+
         [Header("Flight")]
         public float speed = 12f;
         [Tooltip("Seconds before the note fizzles if it hits nothing.")]
@@ -61,8 +65,9 @@ namespace ShredToZero.Combat
             var enemy = other.GetComponentInParent<Enemy>();
             if (enemy == null)
             {
-                Debug.Log($"[Note] {Type} note overlapped '{other.name}' (not an Enemy) — ignoring.", this);
-                return; // flew into a wall or non-enemy; let lifetime clean it up
+                if (verboseLogs)
+                    Debug.Log($"[Note] {Type} note overlapped '{other.name}' (not an Enemy) — ignoring.", this);
+                return; // flew into a wall, the player, or an enemy shot; let lifetime clean it up
             }
 
             enemy.TakeDamage(Type, Damage);
