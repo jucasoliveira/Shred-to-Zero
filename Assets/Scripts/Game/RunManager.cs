@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using ShredToZero.Combat;
 using ShredToZero.Player;
+using ShredToZero.Audio;
 
 namespace ShredToZero.Game
 {
@@ -24,6 +25,11 @@ namespace ShredToZero.Game
 
         [Header("References (auto-found if left empty)")]
         public BombTimer bomb;
+
+        [Header("Sound")]
+        public AudioClip winClip;
+        public AudioClip loseClip;
+        [Range(0f, 1f)] public float sfxVolume = 0.9f;
 
         public RunState State { get; private set; } = RunState.Playing;
 
@@ -107,6 +113,7 @@ namespace ShredToZero.Game
 
         private void EndRun()
         {
+            AudioManager.Play(State == RunState.Won ? winClip : loseClip, sfxVolume);
             Time.timeScale = 0f; // freeze the action on the result screen
             OnRunEnded?.Invoke(State);
             Debug.Log($"[Run] Ended: {State}");

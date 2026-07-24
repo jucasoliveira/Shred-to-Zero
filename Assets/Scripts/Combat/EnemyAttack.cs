@@ -1,5 +1,6 @@
 using UnityEngine;
 using ShredToZero.Rhythm;
+using ShredToZero.Audio;
 
 namespace ShredToZero.Combat
 {
@@ -33,6 +34,10 @@ namespace ShredToZero.Combat
         public int beatsBetweenShots = 2;
         [Tooltip("Seconds between shots when NOT firing on the beat (or if no Conductor exists).")]
         public float fireInterval = 2f;
+
+        [Header("Sound")]
+        public AudioClip shootClip;
+        [Range(0f, 1f)] public float shootVolume = 0.6f;
 
         [Header("Debug")]
         public bool verboseLogs = false;
@@ -87,6 +92,7 @@ namespace ShredToZero.Combat
             Vector3 origin = muzzle != null ? muzzle.position : transform.position;
             EnemyProjectile shot = Instantiate(projectilePrefab, origin, Quaternion.identity);
             shot.Fire(toPlayer.normalized, damage, projectileSpeed);
+            AudioManager.Play(shootClip, shootVolume);
 
             if (verboseLogs) Debug.Log($"[{name}] fired at the player.", this);
         }

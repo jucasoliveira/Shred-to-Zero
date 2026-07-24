@@ -36,14 +36,21 @@ Timing syncs to samples, not frames. The `Conductor` is the single source of mus
 ```
 Assets/
   Scripts/
-    Rhythm/   Conductor.cs        — musical clock (dspTime-based)
+    Rhythm/   Conductor.cs        — musical clock (dspTime-based), on-beat check
     Combat/   NoteType.cs         — the three note types + colours
               NoteProjectile.cs   — a fired note in flight
               Enemy.cs            — health + weakness/resistance affinity
+              EnemyProjectile.cs  — a goon's shot, hurts the player
+              EnemyAttack.cs      — fires at the player on the beat
     Player/   PlayerController.cs — top-down move, cursor targeting, aim
               GuitarWeapon.cs     — key → note type, on-beat empower
-    Game/     BombTimer.cs        — the countdown (win/lose)
-  Prefabs/    Note.prefab
+              PlayerHealth.cs     — HP, i-frames, death
+    Game/     BombTimer.cs        — the countdown (tick/boom, win/lose)
+              RunManager.cs       — run state, enemy count, win/lose screen
+              DisarmZone.cs       — stand-on-the-bomb defuse objective
+    Audio/    AudioManager.cs     — pooled one-shot SFX player
+  Audio/      Impact/ Digital/ Interface/  — Kenney CC0 SFX (see Credits)
+  Prefabs/    note & projectile prefabs
   Scenes/     SampleScene.unity
   Settings/   URP 2D renderer & pipeline assets
 ```
@@ -61,6 +68,22 @@ Controls:
 - **1 / 2 / 3** — fire Power / Bass / Lead notes (on the beat for bonus damage)
 
 > Tip: many components ship with `verboseLogs` on so you can watch damage, on-beat calls, and firing in the Console. Turn those off once combat feels right.
+
+## Credits & third-party assets
+
+### Audio — sound effects
+Sound effects by **[Kenney](https://kenney.nl)**, licensed **[CC0 1.0 Universal](https://creativecommons.org/publicdomain/zero/1.0/)** (public domain — no attribution required, credited here in thanks):
+
+| Pack | Used for | Link |
+|------|----------|------|
+| **Impact Sounds** | note hits, enemy damage/death, player hurt, explosion | https://kenney.nl/assets/impact-sounds |
+| **Digital Audio** | enemy laser/zap shots, power-ups | https://kenney.nl/assets/digital-audio |
+| **Interface Sounds** | bomb ticks, UI, win/lose stings | https://kenney.nl/assets/interface-sounds |
+
+### Audio — music
+_Main track: TBD — royalty-free synthwave. Add the track name, artist, source URL, and license here once chosen (a CC-BY track **must** be credited)._
+
+> CC0 assets are free to use with no attribution required. CC-BY assets are free but **must** be credited — list them above with a link before shipping.
 
 ## Status
 

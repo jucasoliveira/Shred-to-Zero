@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using ShredToZero.Audio;
 
 namespace ShredToZero.Combat
 {
@@ -35,6 +36,11 @@ namespace ShredToZero.Combat
         public bool tintToWeakness = true;
         [Tooltip("Print damage diagnostics to the Console. Turn off once combat feels right.")]
         public bool verboseLogs = true;
+
+        [Header("Sound")]
+        public AudioClip hitClip;
+        public AudioClip deathClip;
+        [Range(0f, 1f)] public float sfxVolume = 0.8f;
 
         /// <summary>Fired when this enemy dies. RunManager/riff-drop logic hooks here on Day 3.</summary>
         public event Action<Enemy> OnDied;
@@ -91,6 +97,7 @@ namespace ShredToZero.Combat
             }
 
             FlashHit(multiplier);
+            AudioManager.Play(hitClip, sfxVolume);
 
             if (Health <= 0f) Die();
             return dealt;
@@ -117,6 +124,7 @@ namespace ShredToZero.Combat
         private void Die()
         {
             if (verboseLogs) Debug.Log($"[Enemy {name}] defeated!", this);
+            AudioManager.Play(deathClip, sfxVolume);
             OnDied?.Invoke(this);
             // Day 3 hook: roll a riff drop here before destroying.
             Destroy(gameObject);

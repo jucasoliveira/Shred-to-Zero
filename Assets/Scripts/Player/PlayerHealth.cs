@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using ShredToZero.Audio;
 
 namespace ShredToZero.Player
 {
@@ -18,6 +19,11 @@ namespace ShredToZero.Player
         [Header("Feedback")]
         public Color hitFlashColor = new(1f, 0.3f, 0.3f);
         public bool verboseLogs = true;
+
+        [Header("Sound")]
+        public AudioClip hurtClip;
+        public AudioClip deathClip;
+        [Range(0f, 1f)] public float sfxVolume = 0.8f;
 
         public float Health { get; private set; }
         public bool IsDead { get; private set; }
@@ -51,6 +57,7 @@ namespace ShredToZero.Player
                 Debug.Log($"[Player] took {amount:0.#} damage | HP {Health:0.#}/{maxHealth:0.#}", this);
 
             FlashHit();
+            AudioManager.Play(hurtClip, sfxVolume);
 
             if (Health <= 0f) Die();
         }
@@ -79,6 +86,7 @@ namespace ShredToZero.Player
         {
             IsDead = true;
             if (verboseLogs) Debug.Log("[Player] DOWN — the goons got you.", this);
+            AudioManager.Play(deathClip, sfxVolume);
             OnDied?.Invoke();
         }
 

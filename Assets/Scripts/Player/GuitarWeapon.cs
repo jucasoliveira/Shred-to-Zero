@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using ShredToZero.Combat;
 using ShredToZero.Rhythm;
+using ShredToZero.Audio;
 
 namespace ShredToZero.Player
 {
@@ -37,6 +38,13 @@ namespace ShredToZero.Player
         [Header("Fire rate")]
         [Tooltip("Minimum seconds between shots, so a held/mashed key can't spray infinitely.")]
         public float fireCooldown = 0.12f;
+
+        [Header("Sound")]
+        [Tooltip("One strum sound per note type, in enum order: Power, Bass, Lead. Any may be left empty.")]
+        public AudioClip[] fireClipsByType = new AudioClip[3];
+        [Tooltip("Optional extra layer played when the shot is on-beat (a big power chord).")]
+        public AudioClip empoweredClip;
+        [Range(0f, 1f)] public float fireVolume = 0.7f;
 
         [Header("Debug")]
         [Tooltip("Print firing diagnostics to the Console. Turn off once it feels right.")]
@@ -98,6 +106,12 @@ namespace ShredToZero.Player
 
             NoteProjectile note = Instantiate(notePrefab, _player.muzzle.position, Quaternion.identity);
             note.Fire(type, _player.AimDirection, damage, onBeat);
+
+            // Strum sound for this note type, plus the power-chord layer when on-beat.
+            int i = (int)type;
+            if (fireClipsByType != null && i < fireClipsByType.Length)
+                AudioManager.Play(fireClipsByType[i], fireVolume);
+            if (onBeat) AudioManager.Play(empoweredClip, fireVolume);
 
             if (verboseLogs)
             {

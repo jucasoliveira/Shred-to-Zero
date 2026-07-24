@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using TMPro;
+using ShredToZero.Audio;
 
 namespace ShredToZero.Game
 {
@@ -28,9 +29,17 @@ namespace ShredToZero.Game
         [Tooltip("Below this many seconds the label turns red and the panic escalation kicks in (Day 4 juice).")]
         public float panicThreshold = 10f;
 
+        [Header("Sound")]
+        [Tooltip("Ticks once per second. Below the panic threshold it ticks twice as fast.")]
+        public AudioClip tickClip;
+        public AudioClip detonateClip;
+        [Range(0f, 1f)] public float sfxVolume = 0.7f;
+
         public float TimeRemaining { get; private set; }
         public bool IsDisarmed { get; private set; }
         public bool HasDetonated { get; private set; }
+
+        private float _tickAccumulator;
 
         /// <summary>Fired once when the timer hits zero (lose).</summary>
         public event Action OnDetonated;
@@ -53,6 +62,7 @@ namespace ShredToZero.Game
                 Detonate();
             }
 
+            Tick();
             UpdateLabel();
         }
 
@@ -73,9 +83,22 @@ namespace ShredToZero.Game
             Debug.Log("BOMB DISARMED — hostages rescued!");
         }
 
+        private void Tick()
+        {
+            // One tick per second normally; twice as fast once we're in the panic zone.
+            float interval = TimeRemaining <= panicThreshold ? 0.5f : 1f;
+            _tickAccumulator += Time.deltaTime;
+            if (_tickAccumulator >= interval)
+            {
+                _tickAccumulator -= interval;
+                AudioManager.Play(tickClip, sfxVolume);
+            }
+        }
+
         private void Detonate()
         {
             HasDetonated = true;
+            AudioManager.Play(detonateClip, sfxVolume);
             OnDetonated?.Invoke();
             Debug.Log("BOOM. Run over.");
         }
