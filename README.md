@@ -86,6 +86,17 @@ Other sound effects (credit the artist(s) once used — verify each track's exac
 |--------|----------|------|
 | **Metronome — Pixabay** | metronome click | https://pixabay.com/sound-effects/film-special-effects-metronome-85688/ |
 
+### Audio — guitar / player notes
+The player's guitar note samples, from **[Freesound](https://freesound.org)** (per-file licenses in each pack's `_readme_and_license.txt`):
+
+| Pack | Used for | Artist | License | Link |
+|------|----------|--------|---------|------|
+| **Nylon Guitar Single Notes** | acoustic note samples (`Assets/Audio/guitar/Accoustic`) | [SpeedY](https://freesound.org/people/SpeedY/) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | https://freesound.org/people/SpeedY/packs/469/ |
+| **Distorted Guitar Single Notes** | basic electric note samples (`Assets/Audio/guitar/BasicElectric`) | [SpeedY](https://freesound.org/people/SpeedY/) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | https://freesound.org/people/SpeedY/packs/643/ |
+| **Electric Guitar Power Chords** | power-chord note samples (`Assets/Audio/guitar/PowerElectric`) | [Ax_Grinder](https://freesound.org/people/Ax_Grinder/) | **[CC-BY 3.0](https://creativecommons.org/licenses/by/3.0/)** — credit required | https://freesound.org/people/Ax_Grinder/packs/14939/ |
+
+> ⚠️ The **Ax_Grinder** power-chord pack is **CC-BY 3.0** — attribution is **mandatory** and must ship with the game. The SpeedY packs are CC0 (credited here in thanks).
+
 ### Audio — music
 _Main track: TBD — royalty-free synthwave. Add the track name, artist, source URL, and license here once chosen (a CC-BY track **must** be credited)._
 

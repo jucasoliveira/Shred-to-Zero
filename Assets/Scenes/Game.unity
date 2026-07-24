@@ -176,8 +176,8 @@ MonoBehaviour:
   moveSpeed: 1.5
   tintToWeakness: 1
   verboseLogs: 1
-  hitClip: {fileID: 0}
-  deathClip: {fileID: 0}
+  hitClip: {fileID: 8300000, guid: 7aa868875a6584b4d8f26b3d717f9c78, type: 3}
+  deathClip: {fileID: 8300000, guid: 3ec9faadef4a24a308e6937b33a7ac13, type: 3}
   sfxVolume: 0.8
 --- !u!50 &1669739
 Rigidbody2D:
@@ -567,8 +567,8 @@ MonoBehaviour:
   invulnSeconds: 0.5
   hitFlashColor: {r: 1, g: 0.3, b: 0.3, a: 1}
   verboseLogs: 1
-  hurtClip: {fileID: 0}
-  deathClip: {fileID: 0}
+  hurtClip: {fileID: 8300000, guid: 7aa868875a6584b4d8f26b3d717f9c78, type: 3}
+  deathClip: {fileID: 8300000, guid: 3ec9faadef4a24a308e6937b33a7ac13, type: 3}
   sfxVolume: 0.8
 --- !u!1 &244559854
 GameObject:
@@ -974,8 +974,8 @@ MonoBehaviour:
   moveSpeed: 1.5
   tintToWeakness: 1
   verboseLogs: 1
-  hitClip: {fileID: 0}
-  deathClip: {fileID: 0}
+  hitClip: {fileID: 8300000, guid: 7aa868875a6584b4d8f26b3d717f9c78, type: 3}
+  deathClip: {fileID: 8300000, guid: 3ec9faadef4a24a308e6937b33a7ac13, type: 3}
   sfxVolume: 0.8
 --- !u!50 &558419268
 Rigidbody2D:
@@ -1531,7 +1531,7 @@ MonoBehaviour:
   inputLatencySeconds: 0
   metronome: 1
   metronomeClick: {fileID: 8300000, guid: 1f9bbef1985c74805a0356f62d1969ee, type: 3}
-  metronomeVolume: 0.377
+  metronomeVolume: 0.419
 --- !u!82 &1444011563
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1545,7 +1545,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.21
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1840,8 +1840,8 @@ MonoBehaviour:
   moveSpeed: 1.5
   tintToWeakness: 1
   verboseLogs: 1
-  hitClip: {fileID: 0}
-  deathClip: {fileID: 0}
+  hitClip: {fileID: 8300000, guid: 7aa868875a6584b4d8f26b3d717f9c78, type: 3}
+  deathClip: {fileID: 8300000, guid: 3ec9faadef4a24a308e6937b33a7ac13, type: 3}
   sfxVolume: 0.8
 --- !u!50 &1973965861
 Rigidbody2D:
@@ -1995,7 +1995,7 @@ MonoBehaviour:
   fireOnBeat: 1
   beatsBetweenShots: 2
   fireInterval: 2
-  shootClip: {fileID: 8300000, guid: c582babf9447b40b59eaf2d565243a09, type: 3}
+  shootClip: {fileID: 8300000, guid: 1c77ca1578fd44f2989996b4e9aad26d, type: 3}
   shootVolume: 0.6
   verboseLogs: 0
 --- !u!1 &2038405651
