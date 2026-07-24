@@ -176,6 +176,9 @@ MonoBehaviour:
   moveSpeed: 1.5
   tintToWeakness: 1
   verboseLogs: 1
+  hitClip: {fileID: 0}
+  deathClip: {fileID: 0}
+  sfxVolume: 0.8
 --- !u!50 &1669739
 Rigidbody2D:
   serializedVersion: 5
@@ -328,6 +331,8 @@ MonoBehaviour:
   fireOnBeat: 1
   beatsBetweenShots: 2
   fireInterval: 2
+  shootClip: {fileID: 8300000, guid: b485e705f213c40eca56af58fe5b86c1, type: 3}
+  shootVolume: 0.6
   verboseLogs: 0
 --- !u!1 &83207905
 GameObject:
@@ -384,6 +389,12 @@ MonoBehaviour:
   onBeatBonus: 2
   onBeatWindowMs: 110
   fireCooldown: 0.12
+  fireClipsByType:
+  - {fileID: 8300000, guid: 6c7500358de5c47a78d61a9ba571c484, type: 3}
+  - {fileID: 8300000, guid: 5a8787d14cfb74d94aa79e8c45694121, type: 3}
+  - {fileID: 8300000, guid: cfe52a9e54d334dff8a2785030071590, type: 3}
+  empoweredClip: {fileID: 8300000, guid: 538a50989c253451da7a3ad6ed5e6db2, type: 3}
+  fireVolume: 0.7
   verboseLogs: 1
   bindings:
   - key: 41
@@ -556,6 +567,9 @@ MonoBehaviour:
   invulnSeconds: 0.5
   hitFlashColor: {r: 1, g: 0.3, b: 0.3, a: 1}
   verboseLogs: 1
+  hurtClip: {fileID: 0}
+  deathClip: {fileID: 0}
+  sfxVolume: 0.8
 --- !u!1 &244559854
 GameObject:
   m_ObjectHideFlags: 0
@@ -669,6 +683,9 @@ MonoBehaviour:
   running: 1
   label: {fileID: 0}
   panicThreshold: 10
+  tickClip: {fileID: 0}
+  detonateClip: {fileID: 0}
+  sfxVolume: 0.7
 --- !u!114 &416680722
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -742,6 +759,7 @@ GameObject:
   - component: {fileID: 519420031}
   - component: {fileID: 519420029}
   - component: {fileID: 519420030}
+  - component: {fileID: 519420033}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -836,7 +854,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 7.39
+  orthographic size: 9.600605
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -867,6 +885,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519420033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineBrain
+  ShowDebugText: 0
+  ShowCameraFrustum: 1
+  IgnoreTimeScale: 0
+  WorldUpOverride: {fileID: 0}
+  ChannelMask: -1
+  UpdateMethod: 2
+  BlendUpdateMethod: 1
+  LensModeOverride:
+    Enabled: 0
+    DefaultMode: 2
+  DefaultBlend:
+    Style: 1
+    Time: 2
+    CustomCurve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+  CustomBlends: {fileID: 0}
 --- !u!1 &558419265
 GameObject:
   m_ObjectHideFlags: 0
@@ -880,6 +930,7 @@ GameObject:
   - component: {fileID: 558419269}
   - component: {fileID: 558419268}
   - component: {fileID: 558419267}
+  - component: {fileID: 558419271}
   m_Layer: 0
   m_Name: Enemy - Bass
   m_TagString: Enemy
@@ -923,6 +974,9 @@ MonoBehaviour:
   moveSpeed: 1.5
   tintToWeakness: 1
   verboseLogs: 1
+  hitClip: {fileID: 0}
+  deathClip: {fileID: 0}
+  sfxVolume: 0.8
 --- !u!50 &558419268
 Rigidbody2D:
   serializedVersion: 5
@@ -1055,6 +1109,29 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &558419271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 558419265}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fea19d37353fe46309614ccfa1bac4e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShredToZero.Combat.EnemyAttack
+  projectilePrefab: {fileID: 5885613017319890068, guid: 2b740c7853f3d483d9d4a0f1bd36e36f, type: 3}
+  muzzle: {fileID: 0}
+  damage: 10
+  projectileSpeed: 5
+  range: 9
+  fireOnBeat: 1
+  beatsBetweenShots: 2
+  fireInterval: 2
+  shootClip: {fileID: 8300000, guid: 2b7b2b688356a4d6e90e7cdb77f0223b, type: 3}
+  shootVolume: 0.6
+  verboseLogs: 0
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1173,6 +1250,134 @@ Transform:
   - {fileID: 1444011564}
   - {fileID: 297911513}
   - {fileID: 1746293565}
+  - {fileID: 1248206452}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1133062334
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1133062339}
+  - component: {fileID: 1133062338}
+  - component: {fileID: 1133062337}
+  - component: {fileID: 1133062336}
+  - component: {fileID: 1133062335}
+  m_Layer: 0
+  m_Name: CinemachineCamera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1133062335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133062334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68bb026fafb42b14791938953eaace77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineBasicMultiChannelPerlin
+  NoiseProfile: {fileID: 0}
+  PivotOffset: {x: 0, y: 0, z: 0}
+  AmplitudeGain: 1
+  FrequencyGain: 1
+  m_NoiseOffsets: {x: 0, y: 0, z: 0}
+--- !u!114 &1133062336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133062334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4afa82ae3200b82408d605c3dbdd1e38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineRotateWithFollowTarget
+  Damping: 0
+--- !u!114 &1133062337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133062334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b617507da6d07e749b7efdb34e1173e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineFollow
+  TrackerSettings:
+    BindingMode: 4
+    PositionDamping: {x: 1, y: 1, z: 1}
+    AngularDampingMode: 0
+    RotationDamping: {x: 1, y: 1, z: 1}
+    QuaternionDamping: 1
+  FollowOffset: {x: 0, y: 0, z: -10}
+--- !u!114 &1133062338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133062334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
+  Priority:
+    Enabled: 0
+    m_Value: 0
+  OutputChannel: 1
+  StandbyUpdate: 2
+  m_StreamingVersion: 20241001
+  m_LegacyPriority: 0
+  Target:
+    TrackingTarget: {fileID: 83207906}
+    LookAtTarget: {fileID: 0}
+    CustomLookAtTarget: 0
+  Lens:
+    FieldOfView: 34
+    OrthographicSize: 9.600605
+    NearClipPlane: 0.3
+    FarClipPlane: 1000
+    Dutch: 0
+    ModeOverride: 0
+    PhysicalProperties:
+      GateFit: 2
+      SensorSize: {x: 21.946, y: 16.002}
+      LensShift: {x: 0, y: 0}
+      FocusDistance: 10
+      Iso: 200
+      ShutterSpeed: 0.005
+      Aperture: 16
+      BladeCount: 5
+      Curvature: {x: 2, y: 11}
+      BarrelClipping: 0.25
+      Anamorphism: 0
+  BlendHint: 0
+--- !u!4 &1133062339
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133062334}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1136043749
@@ -1206,6 +1411,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 664874075}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1248206451
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1248206452}
+  - component: {fileID: 1248206453}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1248206452
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248206451}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 664874075}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1248206453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248206451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d031772ac24714c5a8fde91335b5f4c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShredToZero.Audio.AudioManager
+  masterSfxVolume: 1
+  voices: 12
 --- !u!1 &1274385381
 GameObject:
   m_ObjectHideFlags: 0
@@ -1272,15 +1523,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90cd19fa0cccf48caae7b0dd39f47ef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShredToZero.Rhythm.Conductor
-  song: {fileID: 0}
+  song: {fileID: 8300000, guid: 37955dc28c6454f99b504ed8b83608fd, type: 3}
   bpm: 120
   firstBeatOffset: 0
   playOnStart: 1
   scheduleAheadSeconds: 0.2
   inputLatencySeconds: 0
   metronome: 1
-  metronomeClick: {fileID: 0}
-  metronomeVolume: 0.5
+  metronomeClick: {fileID: 8300000, guid: 1f9bbef1985c74805a0356f62d1969ee, type: 3}
+  metronomeVolume: 0.377
 --- !u!82 &1444011563
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1438,6 +1689,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShredToZero.Game.RunManager
   bomb: {fileID: 0}
+  winClip: {fileID: 0}
+  loseClip: {fileID: 0}
+  sfxVolume: 0.9
 --- !u!1 &1846761924
 GameObject:
   m_ObjectHideFlags: 0
@@ -1542,6 +1796,7 @@ GameObject:
   - component: {fileID: 1973965862}
   - component: {fileID: 1973965861}
   - component: {fileID: 1973965860}
+  - component: {fileID: 1973965864}
   m_Layer: 0
   m_Name: Enemy - Lead
   m_TagString: Enemy
@@ -1585,6 +1840,9 @@ MonoBehaviour:
   moveSpeed: 1.5
   tintToWeakness: 1
   verboseLogs: 1
+  hitClip: {fileID: 0}
+  deathClip: {fileID: 0}
+  sfxVolume: 0.8
 --- !u!50 &1973965861
 Rigidbody2D:
   serializedVersion: 5
@@ -1717,6 +1975,29 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &1973965864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1973965858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fea19d37353fe46309614ccfa1bac4e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShredToZero.Combat.EnemyAttack
+  projectilePrefab: {fileID: 5885613017319890068, guid: 2b740c7853f3d483d9d4a0f1bd36e36f, type: 3}
+  muzzle: {fileID: 0}
+  damage: 10
+  projectileSpeed: 5
+  range: 9
+  fireOnBeat: 1
+  beatsBetweenShots: 2
+  fireInterval: 2
+  shootClip: {fileID: 8300000, guid: c582babf9447b40b59eaf2d565243a09, type: 3}
+  shootVolume: 0.6
+  verboseLogs: 0
 --- !u!1 &2038405651
 GameObject:
   m_ObjectHideFlags: 0
@@ -1756,3 +2037,4 @@ SceneRoots:
   - {fileID: 619394802}
   - {fileID: 664874075}
   - {fileID: 1274385382}
+  - {fileID: 1133062339}

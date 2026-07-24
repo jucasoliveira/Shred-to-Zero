@@ -14,6 +14,11 @@ namespace ShredToZero.Combat
         [Tooltip("Log when the note overlaps something that isn't an enemy. Noisy — off by default.")]
         public bool verboseLogs = false;
 
+        [Header("Look")]
+        [Tooltip("Optional: a distinct note sprite per type, in enum order (Power, Bass, Lead). " +
+                 "Leave empty to keep the prefab's own sprite. Works best with white art so the type tint shows.")]
+        public Sprite[] spritesByType = new Sprite[3];
+
         [Header("Flight")]
         public float speed = 12f;
         [Tooltip("Seconds before the note fizzles if it hits nothing.")]
@@ -39,7 +44,15 @@ namespace ShredToZero.Combat
             _direction = direction.normalized;
 
             _sprite = GetComponentInChildren<SpriteRenderer>();
-            if (_sprite != null) _sprite.color = type.ToColor();
+            if (_sprite != null)
+            {
+                // Swap to this type's note glyph if one is provided.
+                int i = (int)type;
+                if (spritesByType != null && i < spritesByType.Length && spritesByType[i] != null)
+                    _sprite.sprite = spritesByType[i];
+
+                _sprite.color = type.ToColor();
+            }
 
             if (empowered)
             {

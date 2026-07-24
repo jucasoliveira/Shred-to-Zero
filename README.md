@@ -80,8 +80,20 @@ Sound effects by **[Kenney](https://kenney.nl)**, licensed **[CC0 1.0 Universal]
 | **Digital Audio** | enemy laser/zap shots, power-ups | https://kenney.nl/assets/digital-audio |
 | **Interface Sounds** | bomb ticks, UI, win/lose stings | https://kenney.nl/assets/interface-sounds |
 
+Other sound effects (credit the artist(s) once used — verify each track's exact license first):
+
+| Source | Used for | Link |
+|--------|----------|------|
+| **Metronome — Pixabay** | metronome click | https://pixabay.com/sound-effects/film-special-effects-metronome-85688/ |
+
 ### Audio — music
 _Main track: TBD — royalty-free synthwave. Add the track name, artist, source URL, and license here once chosen (a CC-BY track **must** be credited)._
+
+**Candidate tracks to credit once used:**
+
+| Source | Notes | Link |
+|--------|-------|------|
+| **Arclight — Epic Orchestral/Rock Soundtrack** | check per-track license & credit the artist(s) before shipping | https://opengameart.org/content/arclight-epic-orchestralrock-soundtrack |
 
 > CC0 assets are free to use with no attribution required. CC-BY assets are free but **must** be credited — list them above with a link before shipping.
 
